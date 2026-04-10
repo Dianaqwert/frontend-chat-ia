@@ -1,0 +1,98 @@
+/* Esto obliga al componente a expandirse en el espacio disponible */
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Toma el 100% del <main> */
+  width: 100%;
+}
+
+/* Estilizar la barra de scroll para que se vea más moderna (opcional) */
+.overflow-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-auto::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+}
+
+.btn-light-btn{
+  background-color:#BAD7E9 ;
+  color: #2B3467;
+}
+
+.btn-primary-{
+  background-color: #BAD7E9;
+
+}
+
+.btn-primary-:hover{
+  background-color: #2B3467;
+  color: #BAD7E9;
+}
+
+.btn-primary-2{
+  background-color:#F3F9FB ;
+  color:#070D59;
+}
+
+.btn-primary-2:hover{
+
+  background-color: #86A6DF; ;
+  color:#F3F9FB;
+  border-color: #070D59;
+}
+
+.bg-user{
+  background-color:#0B409C;
+  border-color: #E8F1F5;
+  border-style:solid;
+  border-radius: 10px;
+}
+
+.bg-chat{
+  background-color:#F2F7FF;
+  border-color: #0B409C;
+  border-style: solid;
+  border-radius: 10px;
+}
+
+.btn-primary-doc{
+  background-color:#0B409C;
+  border-color: white;
+  border-style: solid;
+  border-radius: 20px;
+}
+
+.btn-primary-doc:hover{
+  background-color:white;
+  border-color: #0B409C;
+  border-style: solid;
+  border-radius: 20px;
+}
+.icon{
+  color: #BAD7E9;
+  font-size: 25px;
+}
+
+.icon:hover{
+  color: #0B409C;
+  font-size: 25px;
+}
+
+.contenedor{
+  background-color: #DDEB9D;
+  color: #070D59;
+}
+
+.btn-light-btnV{
+  background-color: #070D59;
+  color:#DDEB9D;
+}
+
+.btn-light-btnV:hover{
+  border-color: #070D59;
+  color: #070D59;
+  background-color: #DDEB9D;
+  border-style: solid;
+  border-radius: 10dp;
+}

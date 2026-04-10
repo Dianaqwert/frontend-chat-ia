@@ -1,0 +1,49 @@
+.form-label{
+    color:black;
+}
+
+/* Color informativo principal */
+.text-info-custom {
+    color: #19A7CE;
+}
+
+.alert{
+    background-color: #fff3cd;   /* fondo suave */
+    border-color: #ffa500;       /* borde naranja */
+    color: #cc7000;              /* texto naranja oscuro */
+}
+
+.btn-primary-custom{
+    background-color:#2B3467 ;
+    color:#F6F1F1;
+}
+
+.btn-primary-custom:hover{
+    background-color: #4b5590;
+    color: aliceblue;
+}
+
+.btn-seleccionado{
+    background-color: #071952;
+    color: white;
+}
+
+
+
+
+/* Scroll personalizado */
+.overflow-auto::-webkit-scrollbar {
+    width: 5px;
+}
+.overflow-auto::-webkit-scrollbar-thumb {
+    background: #19A7CE;
+    border-radius: 10px;
+}
+
+
+/* Solo muestra el borde divisor si la pantalla es de computadora/tablet */
+@media (min-width: 768px) {
+    .border-end-md {
+        border-right: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+}

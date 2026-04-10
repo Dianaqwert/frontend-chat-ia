@@ -1,0 +1,91 @@
+<div class="container-fluid py-5 min-vh-100 d-flex flex-column">
+  
+  <div class="row w-100 justify-content-center mx-auto my-auto" style="max-width: 1200px;">
+    
+    <div class="col-md-5 text-white p-4 d-flex flex-column justify-content-center border-end-md border-secondary border-opacity-25 mb-4 mb-md-0">
+
+      <h2 class="fw-bold mb-4 ">Ballena Solitaria</h2>
+
+      <div class="p-4 border-start border-4  bg-white bg-opacity-10 rounded">
+
+        <h5 class="mb-3"><i class="bi bi-shield-lock"></i> Tu privacidad es prioridad</h5>
+        <p class="text-light">
+          Los datos proporcionados son procesados por nuestro motor de <strong>Inteligencia Artificial</strong> especializado en lenguaje natural para realizar un triage clínico preventivo.
+        </p>
+        <hr class="border-secondary">
+        <ul class="list-unstyled small">
+          <li class="mb-2"><i class="bi bi-check2-circle text-primary me-2"></i>Análisis basado en escalas PHQ-9 y GAD-7.</li>
+          <li class="mb-2"><i class="bi bi-check2-circle text-primary me-2"></i>Detección de patrones de estrés y ansiedad.</li>
+          <li><i class="bi bi-check2-circle text-primary me-2"></i>Generación de reporte técnico para profesionales.</li>
+        </ul>
+        <p class="alert small mt-4 mb-0">
+          <i class="bi bi-info-circle me-2"></i><strong>Aviso:</strong> Este sistema es una herramienta de apoyo y no sustituye la valoración de un médico o psicólogo.
+        </p>
+      </div>
+    </div>
+
+    <div class="col-md-6 ms-md-4">
+      <div class="card shadow-lg p-4 border-secondary" style="background-color: #F6F1F1; color: black;">
+        
+        @if (fase === 0) {
+          <h3 class="mb-4 text-center fw-bold">Registro de Sesión</h3>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">¿Cómo prefieres que te llame?</label>
+            <input type="text" class="form-control border-secondary shadow-none" [(ngModel)]="datosPersonales.nombre">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-semibold">¿Qué edad tienes?</label>
+            <input type="text" class="form-control border-secondary shadow-none" [(ngModel)]="datosPersonales.edad">
+          </div>
+          <div class="mb-4">
+            <label class="form-label fw-semibold">¿A qué te dedicas?</label>
+            <input type="text" class="form-control border-secondary shadow-none" [(ngModel)]="datosPersonales.ocupacion">
+          </div>
+          <button class="btn btn-primary-custom w-100 fw-bold p-3" (click)="pasarACuestionario()" 
+                  [disabled]="!datosPersonales.nombre || !datosPersonales.edad || !datosPersonales.ocupacion">
+            Comenzar preguntas de seguimiento
+          </button>
+        }
+
+        @if (fase === 1) {
+          <h4 class="text-center fw-bold mb-1">Cuestionario clínico</h4>
+          <p class="text-center text-info-custom fw-bold small mb-3">Preguntas respondidas: {{ totalRespondidas }} de 9</p>
+
+            <div class="px-2 overflow-auto" style="max-height: 55vh;">            
+              @for (pregunta of preguntas; track $index; let qIndex = $index) {
+              <div class="card border-secondary mb-3 shadow-sm bg-white">
+                <div class="card-body">
+                  <p class="mb-3 fw-bold">{{ qIndex + 1 }}. {{ pregunta.texto }}</p>
+                  
+                  <div class="d-flex flex-column gap-2">
+                    @if (pregunta.opciones) {
+                      @for (opc of pregunta.opciones; track opc.v) {
+                        <button class="btn" 
+                                [class.btn-seleccionado]="pregunta.respuesta === opc.v" 
+                                [class.btn-outline-custom]="pregunta.respuesta !== opc.v"
+                                (click)="seleccionarRespuesta(qIndex, opc.v)">
+                          {{ opc.t }}
+                        </button>
+                      }
+                    } @else {
+                      <button class="btn" [class.btn-seleccionado]="pregunta.respuesta === 0" [class.btn-outline-custom]="pregunta.respuesta !== 0" (click)="seleccionarRespuesta(qIndex, 0)">No / Nunca</button>
+                      <button class="btn" [class.btn-seleccionado]="pregunta.respuesta === 1" [class.btn-outline-custom]="pregunta.respuesta !== 1" (click)="seleccionarRespuesta(qIndex, 1)">A veces</button>
+                      <button class="btn" [class.btn-seleccionado]="pregunta.respuesta === 2" [class.btn-outline-custom]="pregunta.respuesta !== 2" (click)="seleccionarRespuesta(qIndex, 2)">Sí / Siempre</button>
+                    }
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+
+          <button class="btn btn-primary-custom w-100 mt-4 fw-bold p-3 shadow-sm" 
+                  (click)="finalizarCuestionario()" 
+                  [disabled]="!todasRespondidas()">
+            {{ todasRespondidas() ? 'Ingresar al Chat Seguro' : 'Faltan respuestas' }}
+          </button>
+        }
+      </div>
+    </div>
+
+  </div>
+</div>

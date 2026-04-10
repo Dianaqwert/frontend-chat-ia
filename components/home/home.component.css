@@ -1,0 +1,70 @@
+.div{
+    background-color: #071952;
+}
+.fondo{
+    background-color:#071952 ;
+    font-family: "Google Sans", sans-serif;
+
+}
+
+/* Aseguramos que el componente abarque el 100% de la pantalla */
+:host {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+/* Configuración de la caja del SVG */
+.ocean-container {
+    line-height: 0; /* Elimina cualquier espacio fantasma debajo del SVG */
+}
+
+.waves {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    margin-bottom: -7px; /* Arregla un bug visual de Safari */
+    min-height: 100px;
+    max-height: 150px;
+}
+
+/* Animación Parallax infinita */
+.parallax > use {
+    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+/* Alteramos el tiempo de cada capa para crear el efecto 3D del agua */
+.parallax > use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+/* Movimiento de traslación del vector */
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+    100% { 
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+/* Ajuste responsivo para celulares */
+@media (max-width: 768px) {
+    .waves {
+        height: 60px;
+        min-height: 60px;
+    }
+}

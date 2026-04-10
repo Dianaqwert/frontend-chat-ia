@@ -1,0 +1,72 @@
+
+
+
+
+<div class="flex-grow-1 overflow-auto overflow-x-hidden p-4">
+
+  <div class="d-flex mb-4 justify-content-center">
+      <div class="p-4 rounded-3 shadow-sm bg-DW text-white text-center" style="max-width: 80%;">
+        <img src="whales_icons-rem.png" alt="Ícono" width="80" class="mb-3 mx-auto d-block girar-infinito"style="filter: invert(1);">
+        <h5 class="mb-3">Bienvenido al chat</h5>
+        <p>Soy Ballena Solitaria, una Inteligencia Artificial entrenada para brindarte primeros auxilios psicológicos<br> Este es un espacio confidencial. <br>Recuerda que no soy un médico humano, pero haré todo lo posible por acompañarte en este momento.</p>
+      </div>
+  </div>
+
+  @for (msg of mensajes; track $index) {
+    <div class="d-flex mb-4 {{ msg.esUsuario ? 'justify-content-end' : 'justify-content-start' }}">
+      <div class="p-3 rounded-3 shadow-sm text-break {{ msg.esUsuario ? 'bg-user text-white' : 'bg-chat text-black' }}" 
+           style="max-width: 75%; font-size: 1.1rem; white-space: pre-wrap;">
+        {{ msg.texto }}
+      </div>
+    </div>
+  }
+
+  @if (sesionTerminada) {
+    <div class="d-flex mb-4 justify-content-center">
+      <div class="contenedor p-4 rounded-3 shadow-sm bg-DW text-center" style="max-width: 80%;">
+        <img src="whale_icon.png" alt="Ícono" width="80" class="mb-3 mx-auto d-block">
+        
+        <h5 class="mb-3">Sesión Finalizada</h5>
+        <p>Tu reporte clínico ha sido generado exitosamente.</p>
+        <a [href]="urlPdfGenerado" target="_blank" class="btn btn-light-btnV fw-bold">
+          Descargar reporte PDF
+        </a>
+      </div>
+    </div>
+  }
+</div>
+
+<div class="p-3 border-top border-secondary flex-shrink-0">
+
+  <div class="d-flex gap-3 align-items-end flex-nowrap w-100">
+
+    <div class="input-group input-group-lg flex-grow-1 shadow-sm">
+      <textarea 
+        #chatInput
+        class="form-control bg-white text-black border-secondary shadow-none" 
+        placeholder="Escribe tu mensaje aquí..." 
+        [(ngModel)]="nuevoMensaje" 
+        (input)="autoResize(chatInput)"
+        (keydown.enter)="enviarConEnter($event, chatInput)"
+        rows="1"
+        [disabled]="sesionTerminada"
+        style="resize: none; overflow-y: auto; max-height: 150px;">
+      </textarea>
+
+      <button class="btn btn-primary- px-4 fw-bold" (click)="enviarMensaje(chatInput)" style="height: 48px;" [disabled]="sesionTerminada">
+        Enviar
+      </button>
+    </div>
+
+    <button 
+      class="btn btn-primary-doc rounded-circle flex-shrink-0 d-flex justify-content-center align-items-center shadow-sm" 
+      (click)="terminarSesion()" 
+      [disabled]="sesionTerminada"
+      style="width: 48px; height: 48px;"
+      title="Generar reporte y salir">
+
+      <i class="bi bi-file-earmark-arrow-down-fill icon"></i>
+    </button>
+
+  </div>
+</div>

@@ -1,7 +1,7 @@
 # FrontendChatIa
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
-
+The goal is to be the front-end of the Lone Whale repository
 ## Development server
 
 To start a local development server, run:
